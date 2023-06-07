@@ -2,7 +2,7 @@ package com.nc.ecommerce.controllers;
 
 
 import com.nc.ecommerce.models.Usuario;
-import com.nc.ecommerce.repositories.ClientRepository;
+import com.nc.ecommerce.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,22 +19,22 @@ public class AppController {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private ClientRepository clientRepository;
+    private UsuarioRepository usRepository;
 
-    @RequestMapping(path = "/clientes", method = RequestMethod.POST)
+    @RequestMapping(path = "/register", method = RequestMethod.POST)
     public ResponseEntity<Object> register(
-            @RequestParam String firstName, @RequestParam String lastName,
+            @RequestParam String nombre,
             @RequestParam String email, @RequestParam String password) {
 
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (nombre.isEmpty() ||  email.isEmpty() || password.isEmpty()) {
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
         }
 
-        if (clientRepository.findByEmail(email) !=  null) {
+        if (usRepository.findByEmail(email) !=  null) {
             return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
         }
 
-        clientRepository.save(new Usuario(firstName, lastName, email, passwordEncoder.encode(password)));
+        usRepository.save(new Usuario(nombre, email, passwordEncoder.encode(password),false));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

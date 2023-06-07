@@ -1,7 +1,7 @@
 package com.nc.ecommerce.configurations;
 
 import com.nc.ecommerce.models.Usuario;
-import com.nc.ecommerce.repositories.ClientRepository;
+import com.nc.ecommerce.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
 
     @Autowired
-    ClientRepository clientRepository;
+    UsuarioRepository clientRepository;
 
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception {

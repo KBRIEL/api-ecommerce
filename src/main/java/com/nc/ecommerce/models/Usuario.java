@@ -13,73 +13,31 @@ public class Usuario {
     @GenericGenerator(name = "native", strategy = "native")
     private Long client_id;
     @Column
-    private String firstName;
-    @Column
-    private String lastName;
+    private String nombre;
+
     @Column
     private String email;
     @Column
     private String password;
 
-
-
-    public Set<ClientLoan> getLoans() {
-
-        return loans;
-    }
-
-    public void addLoans(ClientLoan loan) {
-       // this.loans.add(loan);
-    }
-
-    @OneToMany(mappedBy = "clientLoan_id", fetch = FetchType.EAGER)
-    private Set<ClientLoan> loans = new HashSet<>();
+    @Column
+    private Boolean isAdmin;
 
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    @OneToMany(mappedBy="client_id", fetch=FetchType.EAGER)
-   Set<Procuctos> accounts = new HashSet<>();
-
-    @OneToMany(mappedBy="client_id", fetch=FetchType.EAGER)
-    Set<Card> cards = new HashSet<>();
+    @OneToMany(mappedBy= "usuario_id", fetch=FetchType.EAGER)
+   Set<Producto> productos = new HashSet<>();
 
 
-
-    public Usuario(String _first, String _last, String _email, String _pass) {
-        this.firstName=_first;
-        this.lastName=_last;
-        this.email=_email;
-        this.password= _pass;
-    }
-
-    public Long getId() {
-        return client_id;
-    }
-
-
-
-    public String getFirstName() {
-        return firstName;
-    }
 
     public Usuario() {
 
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getEmail() {
         return email;
@@ -90,26 +48,54 @@ public class Usuario {
     }
 
 
-    public void addAccount(Procuctos account){
-        account.setClient(this);
-        accounts.add(account);
+    public void cargarProducto(Producto pro){
+        pro.setUsuario_id(this);
+
+        productos.add(pro);
     }
 
-    public Set<Procuctos> getAccounts() {
-        return accounts;
+    public Set<Producto> getProductos() {
+        return productos;
     }
 
     public Long getClient_id() {
         return client_id;
     }
 
-    public Set<Card> getCards() {
-        return cards;
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
+
+    public Usuario(String nombre, String email, String password, boolean admin) {
+
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = admin;
+
     }
 
     public String getPassword() {
         return password;
     }
 
+    public void setClient_id(Long client_id) {
+        this.client_id = client_id;
+    }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
+    }
 }

@@ -1,61 +1,56 @@
 package com.nc.ecommerce.models.dtos;
 
-import com.nc.ecommerce.models.Procuctos;
+import com.nc.ecommerce.models.Producto;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ProductoDTO {
 
 
-    private Long account_id;
-    private String number;
-    private LocalDateTime creationDate;
-    private Double balance;
-    private Set<TransactionDTO> transactions= new HashSet<>();
+    private Long producto_id;
+    private String title;
 
-    public ProductoDTO(Procuctos _account ){
-        this.account_id= _account.getId();
-        this.balance= _account.getBalance();
-        this.number= _account.getNumber();
-        this.creationDate= _account.getCreationDate();
-        this.transactions = _account.getTransacctions().stream().map(t->new TransactionDTO(t)).collect(Collectors.toSet());
+    private String thumbnailUrl;
+    private Double precio;
+
+
+    public ProductoDTO(Producto pro) {
+        this.producto_id = pro.getProducto_id();
+        this.title = pro.getTitle();
+        this.thumbnailUrl = pro.getThumbnailUrl();
+        this.precio = pro.getPrecio();
     }
 
-    public Long getAccount_id() {
-        return account_id;
+    public Long getProducto_id() {
+        return producto_id;
     }
 
-    public void setAccount_id(Long account_id) {
-        this.account_id = account_id;
+    public void setProducto_id(Long producto_id) {
+        this.producto_id = producto_id;
     }
 
-    public String getNumber() {
-        return number;
+    public String getTitle() {
+        return title;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
-    public Double getBalance() {
-        return balance;
+    public Double getPrecio() {
+        return precio;
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
-    public Set<TransactionDTO> getTransactions() {
-        return transactions;
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 }

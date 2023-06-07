@@ -15,31 +15,34 @@ public class UsuarioDTO {
 
 
     private Long client_id;
-    private String firstName;
+    private String nombre;
 
-    private String lastName;
+    private String passwork;
 
     private String email;
-    private Set<ProductoDTO> accounts = new HashSet<>();
-    private Set<ClientLoanDTO> loans = new HashSet<>();
+
+    private boolean isAdmin;
+    private Set<ProductoDTO> productos = new HashSet<>();
 
 
-    private Set<CardDTO> cards = new HashSet<>();
+    public UsuarioDTO(Usuario us){
 
-    public Set<ClientLoanDTO> getLoans() {
-        return loans;
+        this.client_id= us.getClient_id();
+        this.nombre =us.getNombre();
+        this.passwork = us.getPassword();
+        this.email= us.getEmail();
+        this.isAdmin= us.getAdmin();
+        this.productos = us.getProductos().stream().map(p ->new ProductoDTO(p)).collect(toSet()) ;
+
     }
 
-    public UsuarioDTO(Usuario _client){
-        this.client_id= _client.getId();
-        this.firstName=_client.getFirstName();
-        this.lastName= _client.getLastName();
-        this.email= _client.getEmail();
-        this.accounts= _client.getAccounts().stream().map(acc ->new ProductoDTO(acc)).collect(toSet()) ;
-        this.loans = _client.getLoans().stream().map(cl->new ClientLoanDTO(cl)).collect(toSet());
-        this.cards = _client.getCards().stream().map(card->new CardDTO(card)).collect(toSet());
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     public Long getClient_id() {
         return client_id;
@@ -49,20 +52,20 @@ public class UsuarioDTO {
         this.client_id = client_id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getPasswork() {
+        return passwork;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPasswork(String passwork) {
+        this.passwork = passwork;
     }
 
     public String getEmail() {
@@ -73,12 +76,10 @@ public class UsuarioDTO {
         this.email = email;
     }
 
-    public Set<ProductoDTO> getAccounts() {
-        return accounts;
+    public Set<ProductoDTO> getProductos() {
+        return productos;
     }
-   public Set<CardDTO> getCards() {
-        return cards;
-    }
+
 
 
 

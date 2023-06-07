@@ -33,7 +33,7 @@ class WebAuthorization extends WebSecurityConfigurerAdapter {
                .antMatchers("/index.html").permitAll()
              .antMatchers("/app/login*").permitAll()
           .antMatchers( "/web/styles/index.css", "/web/scripts/index.js").permitAll()
-            .antMatchers("/web/*").hasAuthority("CLIENT")
+            .antMatchers("/weba/*").hasAuthority("CLIENT")
               .antMatchers("/admin/**").hasAuthority("ADMIN")
              .antMatchers("/rest/**", "/h2-console/**").hasAuthority("ADMIN")
             .antMatchers("/api").permitAll();

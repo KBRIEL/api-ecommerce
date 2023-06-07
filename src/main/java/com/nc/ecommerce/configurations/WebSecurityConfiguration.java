@@ -1,7 +1,7 @@
 package com.nc.ecommerce.configurations;
 
 import com.nc.ecommerce.models.Usuario;
-import com.nc.ecommerce.repositories.ClientRepository;
+import com.nc.ecommerce.repositories.UsuarioRepository;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
     @Autowired
-    ClientRepository clRepository ;
+    UsuarioRepository clRepository ;
 
 
     @Override

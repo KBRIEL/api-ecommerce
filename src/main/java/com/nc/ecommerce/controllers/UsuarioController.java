@@ -2,7 +2,7 @@ package com.nc.ecommerce.controllers;
 
 
 import com.nc.ecommerce.models.dtos.UsuarioDTO;
-import com.nc.ecommerce.service.ClientService;
+import com.nc.ecommerce.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -14,56 +14,40 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class ClientController {
+public class UsuarioController {
 
     @Autowired
-    private ClientService clService;
+    private UsuarioService clService;
 
 
-    @GetMapping("/clients")
+    @GetMapping("/clientes")
     public List<UsuarioDTO> getClients() throws Exception {
         try{
          //   return clRepository.findAll().stream().map(cl -> new ClientDTO(cl)).collect(Collectors.toList());
-            return clService.getClients();
+            return clService.getUsuarios();
         }catch (Exception e){
             throw new Exception("no se encontro cliente");
         }
 
     }
 
-        @RequestMapping("/clients/{id}")
+        @RequestMapping("/clientes/{id}")
         public UsuarioDTO getClient(@PathVariable Long id) {
-    //  return new ClientDTO(clRepository.findById(id).get()) ;
             return clService.getClient(id);
         }
 
-    @RequestMapping("/clients/email/{email}")
+    @RequestMapping("/clientes/email/{email}")
     public UsuarioDTO getClientE(@PathVariable String email) {
-     //  return new ClientDTO(clRepository.findByEmail(email));
         return clService.getClientE(email);
 
     }
 
 
-  /*
-    @RequestMapping("/clients/{email}")
-    public ClientDTO getClientByEmail(@PathVariable String email) {
-            System.out.println(new ClientDTO(clRepository.findByEmail(email)));
-       // return new ClientDTO(clRepository.findByEmail(email)) ;
-        return new ClientDTO(clRepository.findById(1l).get()) ;
-    }
-  @RequestMapping("/google")
-    public ModelAndView getGoo() {
-        ModelAndView mv= new ModelAndView();
-        mv.setViewName("login.html");
-        return mv;
-    }*/
-
-    @PostMapping("/clients")
-    public ResponseEntity<Object> register(@RequestParam String firstName, @RequestParam String lastName,
+    @PostMapping("/clientes")
+    public ResponseEntity<Object> register( @RequestParam String nombre,
                                            @RequestParam String email, @RequestParam String password) {
 
-        return clService.register( firstName,lastName, email, password);
+        return clService.register( nombre, email, password);
 
     }
 

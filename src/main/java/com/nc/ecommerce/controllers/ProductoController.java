@@ -2,7 +2,7 @@ package com.nc.ecommerce.controllers;
 
 
 import com.nc.ecommerce.models.dtos.ProductoDTO;
-import com.nc.ecommerce.service.AccountService;
+import com.nc.ecommerce.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ProductoController {
 
     @Autowired
-    private AccountService accService;
+    private ProductoService accService;
 
     @RequestMapping("/productos")
     public List<ProductoDTO> getAll(){
@@ -36,7 +36,7 @@ public class ProductoController {
     }
     @PostMapping( "/clients/current/accounts")
     public ResponseEntity<Object> createAccount(Authentication authentication){
-        return accService.createAccount(authentication);
+        return accService.cargarProducto(authentication);
     }
 
 }
